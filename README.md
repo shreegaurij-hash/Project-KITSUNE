@@ -1,6 +1,6 @@
  🦊 Project KITSUNE
 
-> **AI-Based Phishing URL Detection System using Python & Machine Learning**
+> **KITSUNE: An Explainable AI-Based Phishing URL Detection Framework**
 
 ---
 Overview
