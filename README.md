@@ -1,29 +1,75 @@
-# Project-KITSUNE
-AI-powered Cybersecurity Platform for Phishing Detection and Online Threat Analysis.
-# Project KITSUNE 🦊
+ 🦊 Project KITSUNE
 
-Project KITSUNE is an AI-powered cybersecurity platform designed to detect phishing websites using machine learning.
+> **AI-Based Phishing URL Detection System using Python & Machine Learning**
 
-## Features
+---
+Overview
 
-- URL Analysis
-- Phishing Detection
-- Confidence Score
-- Explainable AI
-- Security Dashboard
+Project KITSUNE is a cybersecurity project that aims to detect phishing websites by analyzing URL features and using Machine Learning.
 
-## Tech Stack
+The project extracts useful characteristics from URLs, which will later be used to train an AI model capable of identifying phishing attacks.
 
-Python
+This project is currently under active development.
 
-Pandas
+---
+Current Features
 
-NumPy
+- ✅ URL Length Detection
+- ✅ HTTPS Detection
+- ✅ Dot Counter
+- ✅ Hyphen Counter
+- ✅ '@' Symbol Detection
+- ✅ Number Detection
+- ✅ Suspicious Score Calculation
 
-Scikit-learn
+---
+Technologies Used
 
-Flask
+- Python
+- Git
+- GitHub
+- VS Code
 
-Git
+---
 
-GitHub
+Project Structure
+
+Project-KITSUNE/
+│
+├── src/
+│ └── url_features.py
+│
+├── datasets/
+├── models/
+├── docs/
+├── tests/
+│
+├── requirements.txt
+├── .gitignore
+└── README.md
+
+---
+
+ Future Roadmap
+
+- [ ] Collect phishing URL dataset
+- [ ] Feature Engineering
+- [ ] Train Machine Learning models
+- [ ] Build Flask Web Application
+- [ ] Deploy Online
+
+---
+
+Goal
+
+The long-term objective of Project KITSUNE is to build an intelligent phishing detection system that helps users identify malicious websites before visiting them.
+
+---
+Developer
+
+**Shreegouri J**
+
+Computer Science Engineering | AI & Cybersecurity Enthusiast
+
+
+⭐ If you like this project, consider giving it a star.
