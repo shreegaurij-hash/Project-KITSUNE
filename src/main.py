@@ -1,13 +1,29 @@
-from utils import print_heading
 from url_features import *
 
-print_heading()
+url = input("Enter a URL: ")
 
-url = input("Enter URL: ")
+results = analyze_url(url)
 
-print("Length:", url_length(url))
-print("HTTPS:", has_https(url))
-print("Dots:", count_dots(url))
-print("Hyphens:", count_hyphens(url))
-print("@ Symbol:", has_at_symbol(url))
-print("Contains Numbers:", has_numbers(url))
+print("\n========== PROJECT KITSUNE ==========")
+
+for feature, value in results.items():
+    print(f"{feature:<20}: {value}")
+
+score = calculate_score(url)
+
+print("\nSuspicious Score  :", score)
+
+if score <= 2:
+    print("Verdict           : ✅ Low Risk")
+
+elif score <= 5:
+    print("Verdict           : ⚠️ Medium Risk")
+
+else:
+    print("Verdict           : 🚨 High Risk (Possible Phishing)")
+
+print("\nWhy?")
+print("-" * 40)
+
+for reason in explain_risk(url):
+    print("•", reason)
