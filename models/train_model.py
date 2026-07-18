@@ -6,6 +6,8 @@ import joblib
 
 # Load the dataset
 dataset = pd.read_csv("datasets/PhiUSIIL_Phishing_URL_Dataset.csv")
+print(dataset.columns)
+exit()
 
 # Separate features and labels
 X = dataset.drop("label", axis=1)
