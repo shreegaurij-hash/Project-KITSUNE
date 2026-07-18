@@ -43,6 +43,10 @@ X = X.replace({True: 1, False: 0})
 
 # Labels (Safe = 0, Phishing = 1)
 y = dataset["label"]
+print(y.value_counts())
+
+print("\nSample labels:")
+print(dataset[["URL", "label"]].head(20))
 
 print("\nTraining data created!")
 print("Features shape:", X.shape)
@@ -82,3 +86,29 @@ print(f"\nModel Accuracy: {accuracy:.4f}")
 joblib.dump(model, "models/kitsune_model.pkl")
 
 print("\nKITSUNE AI model saved successfully!")
+print("\n========== MODEL TEST ==========")
+
+test_urls = [
+    "https://www.google.com",
+    "http://google.com@evil-site.com/login",
+    "http://192.168.1.10/login",
+    "http://paypal-secure-login-update.com/login.php?id=12345"
+]
+
+for url in test_urls:
+    features = analyze_url(url)
+
+    import pandas as pd
+    X_test_url = pd.DataFrame([features])
+
+    # Convert booleans to integers
+    for column in X_test_url.columns:
+        if X_test_url[column].dtype == bool:
+            X_test_url[column] = X_test_url[column].astype(int)
+
+    prediction = model.predict(X_test_url)[0]
+    probability = model.predict_proba(X_test_url)[0]
+
+    print("\nURL:", url)
+    print("Prediction:", prediction)
+    print("Probability:", probability)

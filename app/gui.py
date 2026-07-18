@@ -1,6 +1,7 @@
 import tkinter as tk
 import os
 import sys
+import traceback 
 
 # Allow access to the models folder
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
@@ -64,6 +65,10 @@ url_entry.pack(pady=10, ipady=5)
 def scan_url():
     url = url_entry.get().strip()
 
+# Automatically add HTTPS if the user doesn't type it
+    if not url.startswith(("http://", "https://")):
+      url = "https://" + url
+
     if not url:
         result_label.config(
             text="Please enter a URL first.",
@@ -74,12 +79,15 @@ def scan_url():
     status.config(text="Status: Scanning...")
 
     try:
-        prediction, confidence, features = predict_url(url)
+        prediction, confidence, features, reasons = predict_url(url)
 
-        if prediction == 1:
+        reason_text = "\n".join(f"• {reason}" for reason in reasons)
+
+        if prediction == 0:
             result_text = (
                 f"❌ PHISHING WEBSITE DETECTED\n\n"
-                f"Confidence: {confidence:.2f}%"
+                f"Confidence: {confidence:.2f}%\n\n"
+                f"Reasons:\n{reason_text}"
             )
 
             result_frame.config(bg="#7F1D1D")
@@ -88,7 +96,8 @@ def scan_url():
         else:
             result_text = (
                 f"✅ SAFE WEBSITE\n\n"
-                f"Confidence: {confidence:.2f}%"
+                f"Confidence: {confidence:.2f}%\n\n"
+                f"Analysis:\n{reason_text}"
             )
 
             result_frame.config(bg="#064E3B")
@@ -96,9 +105,10 @@ def scan_url():
 
         result_label.config(text=result_text)
 
-    except Exception as e:
+    except Exception:
+        traceback.print_exc()
         result_label.config(
-            text=f"Error:\n{e}",
+            text="An error occurred while scanning the URL.",
             fg="red"
         )
 
@@ -124,7 +134,7 @@ result_frame = tk.Frame(
     window,
     bg="#1E293B",
     width=700,
-    height=180
+    height=300
 )
 result_frame.pack(pady=20)
 
